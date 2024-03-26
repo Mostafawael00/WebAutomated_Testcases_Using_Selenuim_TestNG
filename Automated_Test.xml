@@ -1,0 +1,21 @@
+
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1">
+    <test name="Automated_Test1">
+        <classes>
+            <class name="TestCase_001_RegisterUser"> </class>
+            <class name="Testcase_002_Login_With_Correct_Email_Password"> </class>
+            <class name="Testcase_003_Login_With_Incorrect_Email_or_Password"> </class>
+            <class name="Testcase_004_Logout_User"> </class>
+            <class name="Testcase_005_Register_With_Existing_Email"> </class>
+            <class name="Testcase_006_Verify_Product_Detailes_Page"> </class>
+            <class name="Testcase_007_Search_For_Product"> </class>
+            <class name="Testcase_008_Add_Product_to_Cart"> </class>
+            <class name="Testcase_009_Remove_Product_From_Cart"> </class>
+            <class name="Testcase_010_Verify_Product_Quantity_in_Cart"> </class>
+        </classes>
+    </test>
+</suite>
+
