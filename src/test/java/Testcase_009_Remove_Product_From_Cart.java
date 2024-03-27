@@ -13,6 +13,9 @@ public class Testcase_009_Remove_Product_From_Cart {
 
 
     WebDriver driver = null ;
+    HomePage homePage;
+    ProductsPage productsPage;
+    CartPage cartPage;
 
     @BeforeTest
     public void openBrowser()
@@ -24,6 +27,10 @@ public class Testcase_009_Remove_Product_From_Cart {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        homePage = new HomePage();
+        productsPage = new ProductsPage();
+        cartPage = new CartPage();
+
     }
 
     @Test
@@ -31,7 +38,7 @@ public class Testcase_009_Remove_Product_From_Cart {
     {
 
 
-        driver.findElement(By.xpath("//a[@href=\"/products\"]")).click();
+        homePage.ProductsButton(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -40,7 +47,7 @@ public class Testcase_009_Remove_Product_From_Cart {
         }
 
         //add first product to cart
-        driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/a")).click();
+        productsPage.AddProduct1(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -49,11 +56,11 @@ public class Testcase_009_Remove_Product_From_Cart {
         }
 
         //click continue button
-        driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[3]/button")).click();
+        productsPage.ContinueButton(driver).click();
 
 
         //add first product to cart
-        driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[1]/a")).click();
+        productsPage.AddProduct2(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -62,7 +69,7 @@ public class Testcase_009_Remove_Product_From_Cart {
         }
 
         // click view cart
-        driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a")).click();
+        productsPage.ViewCartButton(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -72,16 +79,14 @@ public class Testcase_009_Remove_Product_From_Cart {
 
 
         // Try to delete 2 products
-        driver.findElement(By.xpath("//*[@id=\"product-1\"]/td[6]/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"product-2\"]/td[6]/a")).click();
+        cartPage.DeleteProduct1(driver).click();
+        cartPage.DeleteProduct2(driver).click();
 
         //verify 2 products are Deleted successfully
         String ExpectedEmptyMsg = "Cart is empty!";
-        String ActualEmptyMsg = driver.findElement(By.xpath("//*[@id=\"empty_cart\"]/p")).getText();
+        String ActualEmptyMsg = cartPage.CartEmptyMsg(driver).getText();
 
         Assert.assertTrue(ExpectedEmptyMsg.contains(ActualEmptyMsg));
-
-
 
     }
 

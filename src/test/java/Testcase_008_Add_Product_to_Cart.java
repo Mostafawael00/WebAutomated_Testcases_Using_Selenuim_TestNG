@@ -12,6 +12,9 @@ import java.io.File;
 public class Testcase_008_Add_Product_to_Cart {
 
     WebDriver driver = null ;
+    HomePage homePage;
+    ProductsPage productsPage;
+    CartPage cartPage;
 
     @BeforeTest
     public void openBrowser()
@@ -23,6 +26,11 @@ public class Testcase_008_Add_Product_to_Cart {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        homePage = new HomePage();
+        productsPage = new ProductsPage();
+        cartPage = new CartPage();
+
+
     }
 
     @Test
@@ -30,7 +38,8 @@ public class Testcase_008_Add_Product_to_Cart {
     {
 
 
-        driver.findElement(By.xpath("//a[@href=\"/products\"]")).click();
+        homePage.ProductsButton(driver).click();
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -38,7 +47,7 @@ public class Testcase_008_Add_Product_to_Cart {
         }
 
         //add first product to cart
-        driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/a")).click();
+        productsPage.AddProduct1(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -47,11 +56,11 @@ public class Testcase_008_Add_Product_to_Cart {
         }
 
         //click continue button
-        driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[3]/button")).click();
+        productsPage.ContinueButton(driver).click();
 
 
-        //add first product to cart
-        driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/div[3]/div/div[1]/div[1]/a")).click();
+        //add second product to cart
+        productsPage.AddProduct2(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -60,7 +69,7 @@ public class Testcase_008_Add_Product_to_Cart {
         }
 
         // click view cart
-        driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a")).click();
+        productsPage.ViewCartButton(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -70,12 +79,8 @@ public class Testcase_008_Add_Product_to_Cart {
 
 
         //verify 2 products are added successfully
-        driver.findElement(By.xpath("//*[@id=\"product-1\"]/td[6]/a")).isDisplayed();
-        driver.findElement(By.xpath("//*[@id=\"product-2\"]/td[6]/a")).isDisplayed();
-
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"product-1\"]/td[6]/a")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"product-2\"]/td[6]/a")).isDisplayed());
-
+        Assert.assertTrue(cartPage.Product1Displayed(driver).isDisplayed());
+        Assert.assertTrue(cartPage.Product2Displayed(driver).isDisplayed());
 
     }
 

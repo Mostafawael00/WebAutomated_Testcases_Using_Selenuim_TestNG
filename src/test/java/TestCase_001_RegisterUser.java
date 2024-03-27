@@ -14,6 +14,7 @@ import java.io.File;
 public class TestCase_001_RegisterUser {
 
     WebDriver driver = null ;
+    RegistrationPage registerPage;
 
     @BeforeTest
     public void openBrowser()
@@ -25,99 +26,96 @@ public class TestCase_001_RegisterUser {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        registerPage = new RegistrationPage();
+
     }
 
 
     @Test
     public void RegisterUser () throws InterruptedException {
 
-        driver.findElement(By.xpath("//a[@href=\"/login\"]")).click();
 
+        registerPage.SignupButton(driver).click();
 
         String ExpectedRegistrationMsg = "New User Signup!";
-        String ActualRegistrationMsg = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/h2")).getText();
+        String ActualRegistrationMsg = registerPage.SignupMsg(driver).getText();
 
         Assert.assertTrue(ExpectedRegistrationMsg.contains(ActualRegistrationMsg));
 
-        driver.findElement(By.xpath("//input[@type=\"text\"]")).sendKeys("Mostafa Wael");
-        driver.findElement(By.xpath("//input[@data-qa=\"signup-email\"]")).sendKeys("mostafawael1@gmail.com");
-        driver.findElement(By.xpath("//button[@data-qa=\"signup-button\"]")).click();
-
+        registerPage.NameField(driver).sendKeys("Mostafa Wael");
+        registerPage.EmailField(driver).sendKeys("mostafawael1@gmail.com");
+        registerPage.SignupButton2(driver).click();
 
 
         String ExpectedSignupMsg = "ENTER ACCOUNT INFORMATION";
-        String ActualSignupMsg = driver.findElement(By.xpath("//b")).getText();
+        String ActualSignupMsg = registerPage.RegistrationMsg(driver).getText();
 
         Assert.assertTrue(ExpectedSignupMsg.contains(ActualSignupMsg));
 
         // select gender
-        driver.findElement(By.id("id_gender1")).click();
+        registerPage.GenderField(driver).click();
         // write password
-        driver.findElement(By.id("password")).sendKeys("123456789");
+        registerPage.PasswordField(driver).sendKeys("123456789");
 
 
-        Select DayDropdown =new Select(driver.findElement(By.id("days")));
+        Select DayDropdown =new Select(registerPage.DaySelect(driver));
         DayDropdown.selectByValue("23");
 
-        Select MonthsDropdown =new Select(driver.findElement(By.id("months")));
+        Select MonthsDropdown =new Select(registerPage.MonthSelect(driver));
         MonthsDropdown.selectByValue("4");
 
-        Select YearDropdown =new Select(driver.findElement(By.id("years")));
+        Select YearDropdown =new Select(registerPage.YearSelect(driver));
         YearDropdown.selectByValue("1997");
 
 
-        driver.findElement(By.id("newsletter")).click();
-        driver.findElement(By.id("optin")).click();
+        registerPage.NewsLetterCheckBox(driver).click();
+        registerPage.OptionCheckBox(driver).click();
 
 
-        driver.findElement(By.xpath("//input[@data-qa=\"first_name\"]")).sendKeys("Mostafa");
-        driver.findElement(By.xpath("//input[@data-qa=\"last_name\"]")).sendKeys("Wael");
-        driver.findElement(By.xpath("//input[@data-qa=\"company\"]")).sendKeys("ITI");
-        driver.findElement(By.xpath("//input[@data-qa=\"address\"]")).sendKeys("Cairo-Egypt");
+        registerPage.FirstNameField(driver).sendKeys("Mostafa");
+        registerPage.LastNameField(driver).sendKeys("Wael");
+        registerPage.CompanyField(driver).sendKeys("ITI");
+        registerPage.AddressField(driver).sendKeys("Cairo-Egypt");
 
 
         Thread.sleep(3000);
 
 
 
-        driver.findElement(By.xpath("//input[@data-qa=\"state\"]")).sendKeys("Giza");
+        registerPage.StateField(driver).sendKeys("Giza");
 
-        driver.findElement(By.xpath("//input[@data-qa=\"city\"]")).sendKeys("6 October");
+        registerPage.CityField(driver).sendKeys("6 October");
 
-        driver.findElement(By.xpath("//input[@data-qa=\"zipcode\"]")).sendKeys("1658955");
+        registerPage.ZipcodeField(driver).sendKeys("1658955");
 
-        driver.findElement(By.xpath("//input[@data-qa=\"mobile_number\"]")).sendKeys("01069650017");
-
-
-        Thread.sleep(9000);
+        registerPage.MobileNumberField(driver).sendKeys("01069650017");
 
 
-        driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/form/button")).click();
+        Thread.sleep(5000);
+
+
+        registerPage.CreateAccountButton(driver).click();
 
 
         Thread.sleep(1000);
 
 
         String ExpectedCreateMsg = "ACCOUNT CREATED!";
-        String ActualCreateMsg = driver.findElement(By.xpath("//b")).getText();
+        String ActualCreateMsg = registerPage.CreateAccMsg(driver).getText();
 
         Assert.assertTrue(ExpectedCreateMsg.contains(ActualCreateMsg));
 
 
         // click on continue button after account created
-        driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/a")).click();
+        registerPage.ContinueButton(driver).click();
 
 
         //click on delete account
-        driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[5]/a")).click();
+        registerPage.DeleteAccButton(driver).click();
 
         String ExpectedDeleteMsg = "ACCOUNT DELETED!" ;
-        String ActualDeleteMsg = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/h2/b")).getText();
+        String ActualDeleteMsg = registerPage.DeletdAccMsg(driver).getText();
         Assert.assertTrue(ExpectedDeleteMsg.contains(ActualDeleteMsg));
-
-
-
-
 
     }
 

@@ -13,6 +13,10 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
     WebDriver driver = null ;
 
+    HomePage homePage;
+    ProductsPage productsPage;
+    CartPage cartPage;
+
     @BeforeTest
     public void openBrowser()
     {
@@ -23,6 +27,10 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        homePage = new HomePage();
+        productsPage = new ProductsPage();
+        cartPage = new CartPage();
+
     }
 
 
@@ -32,7 +40,7 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
 
 
-        driver.findElement(By.xpath("//a[@href=\"/products\"]")).click();
+        homePage.ProductsButton(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -41,12 +49,13 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
         }
 
 
-        driver.findElement(By.xpath("//a[@href=\"/product_details/4\"]")).click();
+        productsPage.AddProduct3(driver).click();
 
-        driver.findElement(By.id("quantity")).clear();
-        driver.findElement(By.id("quantity")).sendKeys("4");
+        productsPage.ClearQuantity(driver).clear();
+        productsPage.SetQuantity(driver).sendKeys("4");
 
-        driver.findElement(By.xpath("/html/body/section/div/div/div[2]/div[2]/div[2]/div/span/button")).click();
+        //add to cart button
+        productsPage.AddToCart(driver).click();
 
         try {
             Thread.sleep(1000);
@@ -54,16 +63,13 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
             throw new RuntimeException(e);
         }
 
-        driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a")).click();
+        productsPage.ViewCartButton(driver).click();
 
 
         String ExpectedQuantity =  "4";
-        String ActualQuantity = driver.findElement(By.xpath("//*[@id=\"product-4\"]/td[4]/button")).getText();
+        String ActualQuantity = cartPage.Quantity(driver).getText();
 
         Assert.assertEquals(ActualQuantity, ExpectedQuantity);
-
-
-
 
     }
 

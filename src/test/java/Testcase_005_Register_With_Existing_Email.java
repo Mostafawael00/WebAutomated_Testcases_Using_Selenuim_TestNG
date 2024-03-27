@@ -14,6 +14,10 @@ public class Testcase_005_Register_With_Existing_Email {
 
     WebDriver driver = null;
 
+    RegistrationPage registerPage;
+    LoginPage loginPage;
+    HomePage homePage;
+
     @BeforeTest
     public void openBrowser()
     {
@@ -24,27 +28,31 @@ public class Testcase_005_Register_With_Existing_Email {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        registerPage = new RegistrationPage();
+        loginPage = new LoginPage();
+        homePage = new HomePage();
+
     }
 
     @Test
     public void RegisterUser ()
     {
 
-        driver.findElement(By.xpath("//a[@href=\"/login\"]")).click();
+        registerPage.SignupButton(driver).click();
 
 
         String ExpectedRegistrationMsg = "New User Signup!";
-        String ActualRegistrationMsg = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/h2")).getText();
+        String ActualRegistrationMsg = registerPage.SignupMsg(driver).getText();
 
         Assert.assertTrue(ExpectedRegistrationMsg.contains(ActualRegistrationMsg));
 
-        driver.findElement(By.xpath("//input[@type=\"text\"]")).sendKeys("Mostafa Wael");
-        driver.findElement(By.xpath("//input[@data-qa=\"signup-email\"]")).sendKeys("mostafawael@gmail.com");
-        driver.findElement(By.xpath("//button[@data-qa=\"signup-button\"]")).click();
+        registerPage.NameField(driver).sendKeys("Mostafa Wael");
+        registerPage.EmailField(driver).sendKeys("mostafawael@gmail.com");
+        registerPage.SignupButton2(driver).click();
 
 
         String ExpectedExistingMsg = "Email Address already exist!";
-        String ActualExistingMsg = driver.findElement(By.xpath("/html/body/section/div/div/div[3]/div/form/p")).getText();
+        String ActualExistingMsg = registerPage.EmailExisingMsg(driver).getText();
 
         Assert.assertTrue(ExpectedExistingMsg.contains(ActualExistingMsg));
 

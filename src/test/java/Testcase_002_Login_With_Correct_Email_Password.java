@@ -13,6 +13,9 @@ import java.io.File;
 public class Testcase_002_Login_With_Correct_Email_Password {
 
     WebDriver driver = null ;
+    RegistrationPage registerPage;
+    LoginPage loginPage;
+    HomePage homePage;
 
     @BeforeTest
     public void openBrowser()
@@ -24,30 +27,33 @@ public class Testcase_002_Login_With_Correct_Email_Password {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+        registerPage = new RegistrationPage();
+        loginPage = new LoginPage();
+        homePage = new HomePage();
     }
 
     @Test
     public void LoginUser ()
     {
 
-        driver.findElement(By.xpath("//a[@href=\"/login\"]")).click();
+        registerPage.SignupButton(driver).click();
 
 
-        String ExpectedRegistrationMsg = "Login to your account\n";
-        String ActualRegistrationMsg = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[1]/div/h2")).getText();
+        String ExpectedLoginMsg = "Login to your account\n";
+        String ActualLoginMsg = loginPage.LoginURL_Msg(driver).getText();
 
-        Assert.assertTrue(ExpectedRegistrationMsg.contains(ActualRegistrationMsg));
+        Assert.assertTrue(ExpectedLoginMsg.contains(ActualLoginMsg));
 
         //write email
-        driver.findElement(By.xpath("//input[@data-qa=\"login-email\"]")).sendKeys("mostafawael@gmail.com");
+        loginPage.EmailField(driver).sendKeys("mostafawael@gmail.com");
         // write password
-        driver.findElement(By.xpath("//input[@data-qa=\"login-password\"]")).sendKeys("123456789");
+        loginPage.PasswordField(driver).sendKeys("123456789");
 
-        driver.findElement(By.xpath("//button[@data-qa=\"login-button\"]")).click();
+        loginPage.LoginButton(driver).click();
 
 
         String ExpectedLoginUser = "Mostafa Wael";
-        String ActualLoginUser  = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[10]/a/b")).getText();
+        String ActualLoginUser  = homePage.loginMsg(driver).getText();
 
 
         Assert.assertTrue(ExpectedLoginUser.contains(ActualLoginUser));

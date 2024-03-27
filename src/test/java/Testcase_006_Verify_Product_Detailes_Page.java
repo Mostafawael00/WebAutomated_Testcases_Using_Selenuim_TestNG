@@ -14,6 +14,8 @@ public class Testcase_006_Verify_Product_Detailes_Page {
 
     WebDriver driver = null ;
 
+
+    HomePage homePage;
     @BeforeTest
     public void openBrowser()
     {
@@ -23,6 +25,8 @@ public class Testcase_006_Verify_Product_Detailes_Page {
 
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
+
+        homePage = new HomePage();
 
     }
 
@@ -34,7 +38,7 @@ public class Testcase_006_Verify_Product_Detailes_Page {
 
 
 
-        driver.findElement(By.xpath("//a[@href=\"/products\"]")).click();
+        homePage.ProductsButton(driver).click();
 
         try {
             Thread.sleep(2000);

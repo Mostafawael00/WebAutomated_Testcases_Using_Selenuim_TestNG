@@ -12,6 +12,8 @@ import java.io.File;
 public class Testcase_007_Search_For_Product {
 
     WebDriver driver = null ;
+    HomePage homePage;
+    ProductsPage productsPage;
 
     @BeforeTest
     public void openBrowser()
@@ -23,6 +25,11 @@ public class Testcase_007_Search_For_Product {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
+
+        homePage = new HomePage();
+        productsPage = new ProductsPage();
+
+
     }
     @Test
     public void Verify_Products_Search()
@@ -30,7 +37,7 @@ public class Testcase_007_Search_For_Product {
 
 
 
-        driver.findElement(By.xpath("//a[@href=\"/products\"]")).click();
+        homePage.ProductsButton(driver).click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -38,11 +45,11 @@ public class Testcase_007_Search_For_Product {
         }
 
 
-        driver.findElement(By.id("search_product")).sendKeys("Polo");
-        driver.findElement(By.id("submit_search")).click();
+        productsPage.SearchField(driver).sendKeys("Polo");
+        productsPage.SearchButton(driver).click();
 
         String ExpectedSearchPage = "SEARCHED PRODUCTS";
-        String ActualSearchPage = driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/h2")).getText();
+        String ActualSearchPage = productsPage.SearchMsg(driver).getText();
         Assert.assertTrue(ExpectedSearchPage.contains(ActualSearchPage));
 
     }
