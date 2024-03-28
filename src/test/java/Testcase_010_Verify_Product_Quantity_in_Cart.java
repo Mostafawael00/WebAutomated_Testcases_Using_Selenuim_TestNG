@@ -12,7 +12,6 @@ import java.io.File;
 public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
     WebDriver driver = null ;
-
     HomePage homePage;
     ProductsPage productsPage;
     CartPage cartPage;
@@ -30,15 +29,12 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
         homePage = new HomePage();
         productsPage = new ProductsPage();
         cartPage = new CartPage();
-
     }
 
 
     @Test
     public void Verify_Products_Search()
     {
-
-
 
         homePage.ProductsButton(driver).click();
 
@@ -48,13 +44,11 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
             throw new RuntimeException(e);
         }
 
-
         productsPage.AddProduct3(driver).click();
 
         productsPage.ClearQuantity(driver).clear();
         productsPage.SetQuantity(driver).sendKeys("4");
 
-        //add to cart button
         productsPage.AddToCart(driver).click();
 
         try {

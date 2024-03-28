@@ -44,9 +44,8 @@ public class Testcase_002_Login_With_Correct_Email_Password {
 
         Assert.assertTrue(ExpectedLoginMsg.contains(ActualLoginMsg));
 
-        //write email
         loginPage.EmailField(driver).sendKeys("mostafawael@gmail.com");
-        // write password
+
         loginPage.PasswordField(driver).sendKeys("123456789");
 
         loginPage.LoginButton(driver).click();
@@ -57,7 +56,6 @@ public class Testcase_002_Login_With_Correct_Email_Password {
 
 
         Assert.assertTrue(ExpectedLoginUser.contains(ActualLoginUser));
-
     }
 
     @AfterTest
@@ -71,8 +69,4 @@ public class Testcase_002_Login_With_Correct_Email_Password {
 
         driver.quit();
     }
-
-
-
-
 }

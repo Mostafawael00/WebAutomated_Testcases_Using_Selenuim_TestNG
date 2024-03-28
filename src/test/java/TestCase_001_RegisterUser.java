@@ -30,7 +30,6 @@ public class TestCase_001_RegisterUser {
 
     }
 
-
     @Test
     public void RegisterUser () throws InterruptedException {
 
@@ -42,6 +41,7 @@ public class TestCase_001_RegisterUser {
 
         Assert.assertTrue(ExpectedRegistrationMsg.contains(ActualRegistrationMsg));
 
+
         registerPage.NameField(driver).sendKeys("Mostafa Wael");
         registerPage.EmailField(driver).sendKeys("mostafawael1@gmail.com");
         registerPage.SignupButton2(driver).click();
@@ -52,9 +52,9 @@ public class TestCase_001_RegisterUser {
 
         Assert.assertTrue(ExpectedSignupMsg.contains(ActualSignupMsg));
 
-        // select gender
+
         registerPage.GenderField(driver).click();
-        // write password
+
         registerPage.PasswordField(driver).sendKeys("123456789");
 
 
@@ -67,19 +67,19 @@ public class TestCase_001_RegisterUser {
         Select YearDropdown =new Select(registerPage.YearSelect(driver));
         YearDropdown.selectByValue("1997");
 
-
         registerPage.NewsLetterCheckBox(driver).click();
         registerPage.OptionCheckBox(driver).click();
 
-
         registerPage.FirstNameField(driver).sendKeys("Mostafa");
+
         registerPage.LastNameField(driver).sendKeys("Wael");
+
         registerPage.CompanyField(driver).sendKeys("ITI");
+
         registerPage.AddressField(driver).sendKeys("Cairo-Egypt");
 
 
         Thread.sleep(3000);
-
 
 
         registerPage.StateField(driver).sendKeys("Giza");
@@ -130,5 +130,4 @@ public class TestCase_001_RegisterUser {
 
         driver.quit();
     }
-
 }

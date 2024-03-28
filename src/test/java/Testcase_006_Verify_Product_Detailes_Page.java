@@ -13,9 +13,8 @@ public class Testcase_006_Verify_Product_Detailes_Page {
 
 
     WebDriver driver = null ;
-
-
     HomePage homePage;
+
     @BeforeTest
     public void openBrowser()
     {
@@ -29,8 +28,6 @@ public class Testcase_006_Verify_Product_Detailes_Page {
         homePage = new HomePage();
 
     }
-
-
 
     @Test
     public void Verify_Product_Detaile_Page()
@@ -61,13 +58,9 @@ public class Testcase_006_Verify_Product_Detailes_Page {
         driver.findElement(By.xpath("//*[@id=\"dismiss-button\"]")).click();
         driver.switchTo().parentFrame();*/
 
-
-
-
-
         String ExpectedProductsPage = "https://automationexercise.com/products";
         String ActualProductsPage = driver.getCurrentUrl();
-        //System.out.println(ActualProductsPage);
+
 
         Assert.assertTrue(ExpectedProductsPage.contains(ActualProductsPage));
 
@@ -83,8 +76,4 @@ public class Testcase_006_Verify_Product_Detailes_Page {
         }
         driver.quit();
     }
-
-
-
-
 }

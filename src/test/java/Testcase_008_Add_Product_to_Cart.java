@@ -30,7 +30,6 @@ public class Testcase_008_Add_Product_to_Cart {
         productsPage = new ProductsPage();
         cartPage = new CartPage();
 
-
     }
 
     @Test
@@ -55,11 +54,9 @@ public class Testcase_008_Add_Product_to_Cart {
             throw new RuntimeException(e);
         }
 
-        //click continue button
         productsPage.ContinueButton(driver).click();
 
 
-        //add second product to cart
         productsPage.AddProduct2(driver).click();
 
         try {
@@ -68,7 +65,6 @@ public class Testcase_008_Add_Product_to_Cart {
             throw new RuntimeException(e);
         }
 
-        // click view cart
         productsPage.ViewCartButton(driver).click();
 
         try {
@@ -78,7 +74,6 @@ public class Testcase_008_Add_Product_to_Cart {
         }
 
 
-        //verify 2 products are added successfully
         Assert.assertTrue(cartPage.Product1Displayed(driver).isDisplayed());
         Assert.assertTrue(cartPage.Product2Displayed(driver).isDisplayed());
 
@@ -94,8 +89,5 @@ public class Testcase_008_Add_Product_to_Cart {
         }
         driver.quit();
     }
-
-
-
 
 }

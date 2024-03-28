@@ -70,13 +70,4 @@ public class Testcase_005_Register_With_Existing_Email {
         driver.quit();
     }
 
-
-
-
-
-
-
-
-
-
 }

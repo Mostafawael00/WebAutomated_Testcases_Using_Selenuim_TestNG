@@ -49,9 +49,8 @@ public class Testcase_004_Logout_User {
 
         Assert.assertTrue(ExpectedRegistrationMsg.contains(ActualRegistrationMsg));
 
-        //write email
         loginPage.EmailField(driver).sendKeys("mostafawael@gmail.com");
-        // write password
+
         loginPage.PasswordField(driver).sendKeys("123456789");
 
         loginPage.LoginButton(driver).click();
@@ -63,7 +62,6 @@ public class Testcase_004_Logout_User {
 
         Assert.assertTrue(ExpectedLoginUser.contains(ActualLoginUser));
 
-        //click on logout button
         homePage.LogoutButton(driver).click();
 
         String ExpectedCurrentURL = "https://automationexercise.com/login";

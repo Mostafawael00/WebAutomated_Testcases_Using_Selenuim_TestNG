@@ -29,21 +29,19 @@ public class Testcase_007_Search_For_Product {
         homePage = new HomePage();
         productsPage = new ProductsPage();
 
-
     }
     @Test
     public void Verify_Products_Search()
     {
 
 
-
         homePage.ProductsButton(driver).click();
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
 
         productsPage.SearchField(driver).sendKeys("Polo");
         productsPage.SearchButton(driver).click();
