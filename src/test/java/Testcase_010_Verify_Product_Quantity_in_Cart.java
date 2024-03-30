@@ -3,11 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
@@ -16,7 +15,7 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
     ProductsPage productsPage;
     CartPage cartPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser()
     {
         // to open chrome with extension
@@ -25,6 +24,11 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
+
+        // to switch display the previous tab
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.getFirst());
+
 
         homePage = new HomePage();
         productsPage = new ProductsPage();
@@ -67,7 +71,7 @@ public class Testcase_010_Verify_Product_Quantity_in_Cart {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void ClosBrowser()
     {
         try {

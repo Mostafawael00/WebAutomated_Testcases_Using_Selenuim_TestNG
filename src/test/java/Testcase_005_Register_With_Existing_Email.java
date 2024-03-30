@@ -4,11 +4,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Testcase_005_Register_With_Existing_Email {
 
@@ -18,7 +17,7 @@ public class Testcase_005_Register_With_Existing_Email {
     LoginPage loginPage;
     HomePage homePage;
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser()
     {
         // to open chrome with extension
@@ -27,6 +26,12 @@ public class Testcase_005_Register_With_Existing_Email {
 
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
+
+
+        // to switch display the previous tab
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.getFirst());
+
 
         registerPage = new RegistrationPage();
         loginPage = new LoginPage();
@@ -58,7 +63,7 @@ public class Testcase_005_Register_With_Existing_Email {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void ClosBrowser()
     {
         try {

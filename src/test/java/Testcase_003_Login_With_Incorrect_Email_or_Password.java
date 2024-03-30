@@ -2,11 +2,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Testcase_003_Login_With_Incorrect_Email_or_Password {
 
@@ -15,7 +14,7 @@ public class Testcase_003_Login_With_Incorrect_Email_or_Password {
     RegistrationPage registrationPage;
     LoginPage loginPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser()
     {
         // to open chrome with extension
@@ -24,6 +23,11 @@ public class Testcase_003_Login_With_Incorrect_Email_or_Password {
 
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
+
+
+        // to switch display the previous tab
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.getFirst());
 
         loginPage = new LoginPage();
         registrationPage = new RegistrationPage();
@@ -58,7 +62,7 @@ public class Testcase_003_Login_With_Incorrect_Email_or_Password {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void ClosBrowser()
     {
         try {

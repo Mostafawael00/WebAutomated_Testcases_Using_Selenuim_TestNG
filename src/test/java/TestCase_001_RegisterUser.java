@@ -5,18 +5,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class TestCase_001_RegisterUser {
 
     WebDriver driver = null ;
     RegistrationPage registerPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser()
     {
         // to open chrome with extension
@@ -26,7 +25,13 @@ public class TestCase_001_RegisterUser {
         driver = new ChromeDriver(opt);
         driver.navigate().to("https://automationexercise.com/");
 
-        registerPage = new RegistrationPage();
+
+        // to switch display the previous tab
+       ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+       driver.switchTo().window(tabs.getFirst());
+
+
+         registerPage = new RegistrationPage();
 
     }
 
@@ -119,7 +124,7 @@ public class TestCase_001_RegisterUser {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void ClosBrowser()
     {
         try {
