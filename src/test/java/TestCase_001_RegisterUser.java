@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class TestCase_001_RegisterUser {
 
+    //try
     WebDriver driver = null ;
     RegistrationPage registerPage;
 
